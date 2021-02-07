@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+.sample{
+	display:true;
+}
+.table{
+	margin:1px;
+	border:"none";
+	padding:0;
+}
+.row{
+	margin:1px;
+	border:"none";
+	padding:0;
+	height:20px;
+}
+.row.headers{
+	font-weight:14;
+}
+.column.accounts{
+	margin:1px;
+	border:"none";
+	padding:0;
+	width:30%;
+}
+.column.history{
+	margin:1px;
+	border:"none";
+	padding:0;
+	width:22%;
+}
