@@ -66,7 +66,7 @@ public class DAOTransaction extends POJOTransaction implements DAO{
 	}
 	@Override
 	public boolean update() {
-		return false;
+		return true;
 		// TODO Auto-generated method stub
 		
 	}

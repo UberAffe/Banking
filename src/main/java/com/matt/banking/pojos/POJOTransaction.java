@@ -75,10 +75,10 @@ public class POJOTransaction {
 	public void setPending(boolean pending) {
 		this.accepted = pending;
 	}
-	public final Date getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
-	public final void setTimestamp(Date timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 }

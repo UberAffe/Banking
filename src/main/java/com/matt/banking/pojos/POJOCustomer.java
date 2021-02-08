@@ -6,6 +6,11 @@ import com.matt.banking.daos.DAOAccount;
 import com.matt.banking.daos.DAOTransaction;
 
 public class POJOCustomer extends POJOUser{
+	@Override
+	public String toString() {
+		return "POJOCustomer [accounts=" + accounts + ", transactions=" + transactions + ", userID=" + userID
+				+ ", username=" + username + ", password=" + password + "]";
+	}
 	protected ArrayList<DAOAccount> accounts;
 	protected ArrayList<DAOTransaction> transactions;
 	public POJOCustomer() {
