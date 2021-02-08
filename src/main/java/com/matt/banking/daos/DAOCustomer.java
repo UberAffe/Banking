@@ -1,5 +1,6 @@
 package com.matt.banking.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,9 +89,19 @@ public class DAOCustomer extends POJOCustomer implements DAO{
 
 	@Override
 	public boolean update() {
-		return false;
-		// TODO Auto-generated method stub
-		
+		boolean success=false;
+		try {
+			Connection conn = DB.getConnection();
+			CallableStatement cs = conn.prepareCall("call acceptuser(?,?)");
+			cs.setInt(1, userID);
+			cs.setBoolean(2, approved);
+			cs.executeUpdate();
+			success=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success;
 	}
 
 	@Override
@@ -105,6 +116,25 @@ public class DAOCustomer extends POJOCustomer implements DAO{
 			account.read();
 		}
 		return accounts;
+	}
+
+	public static ArrayList<DAOCustomer> getPending() {
+		ArrayList<DAOCustomer> customers = new ArrayList<DAOCustomer>();
+		try {
+			Connection conn = DB.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select * from getallpendingusers()");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				DAOCustomer customer = new DAOCustomer();
+				customer.setUserID(rs.getInt("user_id"));
+				customer.setUsername(rs.getString("username"));
+				customers.add(customer);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return customers;
 	}
 
 }

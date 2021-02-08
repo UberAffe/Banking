@@ -55,4 +55,22 @@ public class EmployeeOps {
 		}
 		return response;
 	}
+	
+	@POST
+	@Path("/pendingusers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public static String getPendingUsers() {
+		String response="";
+		ObjectMapper om = new ObjectMapper();
+		try {
+			response = om.writeValueAsString(DAOCustomer.getPending());
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
 }

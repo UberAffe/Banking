@@ -4,8 +4,15 @@ public class POJOUser {
 	protected int userID;
 	protected String username;
 	protected String password;
+	protected boolean approved;
 	public final int getUserID() {
 		return userID;
+	}
+	public boolean isApproved() {
+		return approved;
+	}
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	public final void setUserID(int userID) {
 		this.userID = userID;

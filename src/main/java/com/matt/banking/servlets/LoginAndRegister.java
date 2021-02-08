@@ -1,5 +1,8 @@
 package com.matt.banking.servlets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matt.banking.daos.DAOCustomer;
+import com.matt.banking.daos.DAOTransaction;
 import com.matt.banking.pojos.POJOUser;
 import com.matt.banking.utils.FactoryUser;
 
@@ -62,6 +66,34 @@ public class LoginAndRegister {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return response;
+	}
+	
+	@POST
+	@Path("/decisions")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String userDecision(String json) {
+		String response="";
+		ObjectMapper om = new ObjectMapper();
+		try {
+			response="{\"results\":[";
+			List<DAOCustomer> users=om.readValue(json, om.getTypeFactory().constructCollectionType(ArrayList.class, DAOCustomer.class));
+			for(DAOCustomer user:users) {
+				if(!response.equals("{\"results\":[")) {
+					response+=",";
+				}
+					response+="\""+user.update()+"\"";
+			}
+			response+="]}";
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(response);
 		return response;
 	}
 }

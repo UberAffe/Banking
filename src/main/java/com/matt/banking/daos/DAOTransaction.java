@@ -66,9 +66,21 @@ public class DAOTransaction extends POJOTransaction implements DAO{
 	}
 	@Override
 	public boolean update() {
-		return true;
-		// TODO Auto-generated method stub
-		
+		boolean success = false;
+		try {
+			Connection conn = DB.getConnection();
+			CallableStatement cs = conn.prepareCall("call accepttransfer(?,?,?)");
+			cs.setInt(1, transactionID);
+			cs.setInt(2, toUser);
+			cs.registerOutParameter(3,Types.BOOLEAN);
+			cs.setBoolean(3, accepted);
+			cs.executeUpdate();
+			success = cs.getBoolean(3);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return success;
 	}
 	@Override
 	public void delete() {

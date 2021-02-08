@@ -33,6 +33,7 @@ public final class FactoryUser {
 				}
 				user.setUserID(rs.getInt("uid"));
 				user.setUsername(username);
+				user.setApproved(rs.getBoolean("ap"));
 				((DAO)user).read();
 				System.out.println("login successful");
 			}

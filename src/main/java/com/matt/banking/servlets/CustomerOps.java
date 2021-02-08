@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.matt.banking.daos.DAOAccount;
 import com.matt.banking.daos.DAOCustomer;
 import com.matt.banking.daos.DAOTransaction;
 
@@ -74,6 +75,28 @@ public class CustomerOps {
 			DAOCustomer user = om.readValue(json, DAOCustomer.class);
 			user.read();
 			response = om.writeValueAsString(user);
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	@POST
+	@Path("/apply")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public static String applyForAccount(String json) {
+		log.info("applying for account.");
+		String response ="";
+		ObjectMapper om = new ObjectMapper();
+		try {
+			DAOAccount account = om.readValue(json, DAOAccount.class);
+			if(account.create()) {
+				response = om.writeValueAsString(account);
+			}
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
