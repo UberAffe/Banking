@@ -32,7 +32,7 @@ public class DAOCustomer extends POJOCustomer implements DAO{
 			ps.setString(3, "CUSTOMER");
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				userID=rs.getInt("user_id");
+				userID=rs.getInt(1);
 				success=true;
 			}
 		} catch (SQLException e) {
