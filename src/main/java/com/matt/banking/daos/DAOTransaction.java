@@ -75,7 +75,7 @@ public class DAOTransaction extends POJOTransaction implements DAO{
 			cs.registerOutParameter(3,Types.BOOLEAN);
 			cs.setBoolean(3, accepted);
 			cs.executeUpdate();
-			success = cs.getBoolean(3);
+			success = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
