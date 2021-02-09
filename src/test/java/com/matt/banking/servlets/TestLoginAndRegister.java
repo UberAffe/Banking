@@ -11,22 +11,21 @@ public class TestLoginAndRegister {
 
 	@BeforeAll
 	public static void setup() {
-		DB.isTestCase=true;
+		DB.isTestCase = true;
 	}
+
 	
-	/*
-	 * @Test public void goodUserLogin() { LoginAndRegister lar = new
-	 * LoginAndRegister(); String user =
-	 * lar.login("{\"username\":\"matt\",\"password\":\"keran\"}");
-	 * System.out.println(user); Assertions.assertTrue(
-	 * "{\"userID\":3,\"username\":\"matt\",\"password\":\"\",\"accounts\":[]}".
-	 * equals(user)); }
-	 * 
-	 * @Test public void badUserLogin() { LoginAndRegister lar = new
-	 * LoginAndRegister(); String user =
-	 * lar.login("{\"username\":\"matt\",\"password\":\"\"}");
-	 * System.out.println(user); Assertions.assertFalse(
-	 * "{\"userID\":3,\"username\":\"matt\",\"password\":\"\",\"accounts\":[]}".
-	 * equals(user)); }
-	 */
+	 @Test public void goodUserLogin() { 
+		 LoginAndRegister lar = new LoginAndRegister(); 
+		 String user =  lar.login("{\"username\":\"matt\",\"password\":\"keran\"}");
+		 Assertions.assertFalse(user.equals("{\"username\":\"matt\",\"password\":\"keran\"}")); 
+	 }
+	 
+	 @Test public void badUserLogin() { 
+		 LoginAndRegister lar = new
+		 LoginAndRegister(); String user =
+		 lar.login("{\"username\":\"matt\",\"password\":\"\"}");
+		 Assertions.assertTrue(user.equals("{\"username\":\"matt\",\"password\":\"\"}")); 
+	 }
+	 
 }
